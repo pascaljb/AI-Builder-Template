@@ -83,6 +83,7 @@ Do not ask the user to provide them.
 | "review this" / "review the feature" / "full audit" | code-review |
 | "build [feature]" / "scaffold [feature]" | scaffold-feature |
 | "add [entity] table" / "scaffold [entity]" | scaffold-supabase |
+| "write copy for" / "improve this headline" / "critique my CTA" / "empty state copy" | copywriting |
 | End of session / "wrapping up" / "done for today" | session-end |
 
 Skills live in .claude/skills/. Read the relevant SKILL.md before executing.

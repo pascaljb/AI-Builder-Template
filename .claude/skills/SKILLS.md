@@ -49,6 +49,7 @@ Never silently fail. Always tell the user what's missing and how to fix it.
 .claude/skills/
   SKILLS.md                  ← this file
   code-review/SKILL.md
+  copywriting/SKILL.md
   figma-extract-brand/SKILL.md
   scaffold-feature/SKILL.md
   scaffold-supabase/SKILL.md
