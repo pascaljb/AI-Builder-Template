@@ -55,4 +55,5 @@ Never silently fail. Always tell the user what's missing and how to fix it.
   scaffold-supabase/SKILL.md
   session-start/SKILL.md
   session-end/SKILL.md
+  tdd/SKILL.md
 ```
