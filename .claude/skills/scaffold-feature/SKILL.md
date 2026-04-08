@@ -26,7 +26,18 @@ Ask the minimum needed to scaffold correctly. Usually just:
 If the request is clear enough, skip asking and state your assumptions at the
 top of the output instead.
 
-### Step 2 — Determine what to generate
+### Step 2 — TDD integration
+
+All feature scaffolding follows red/green TDD. For each file generated, the
+order is: **write test → run → confirm red → write implementation → run →
+confirm green**. Work bottom-up through the layers.
+
+See `.claude/skills/tdd/SKILL.md` for the full red/green protocol.
+
+If the user explicitly says "skip tests" or "no tests", scaffold without tests
+but note this in the output as a deviation.
+
+### Step 3 — Determine what to generate
 
 | Condition | Generate |
 |-----------|----------|
@@ -35,7 +46,7 @@ top of the output instead.
 | Feature reads from Supabase | Component + slice + query function |
 | Feature writes to Supabase | Component + slice + query function + optimistic update |
 
-### Step 3 — Generate files
+### Step 4 — Generate files
 
 #### Component: `src/components/features/[FeatureName]/[FeatureName].tsx`
 
@@ -78,7 +89,7 @@ Follow `_template.ts` exactly. Include:
 // - JSDoc comment describing what it does and what it returns
 ```
 
-### Step 4 — Output format
+### Step 5 — Output format
 
 Show files one at a time with full content. After each file:
 "[filename] — ready. Next: [what comes next]"
@@ -88,7 +99,12 @@ After all files:
 Feature scaffolded:
 - src/components/features/[Name]/[Name].tsx
 - src/store/slices/[name].ts
+- src/store/slices/[name].test.ts
 - [query file if applicable]
+- [query test file if applicable]
+- src/components/features/[Name]/[Name].test.tsx
+
+Tests: [N] passing, 0 failing
 
 Assumptions made:
 - [any assumption that might be wrong]

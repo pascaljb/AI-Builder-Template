@@ -56,6 +56,9 @@ Do not ask the user to provide them.
 - Utilities → src/lib/utils.ts
 - Global types → src/types/index.ts
 - Generated DB types → src/types/database.ts (never edit manually)
+- Unit/component tests → co-located *.test.{ts,tsx} next to the file under test
+- E2E tests → e2e/*.spec.ts
+- Test utilities → src/test/ (setup, custom render, mocks)
 
 ### Hard rules
 - No any without a // reason: comment
@@ -84,6 +87,7 @@ Do not ask the user to provide them.
 | "build [feature]" / "scaffold [feature]" | scaffold-feature |
 | "add [entity] table" / "scaffold [entity]" | scaffold-supabase |
 | "write copy for" / "improve this headline" / "critique my CTA" / "empty state copy" | copywriting |
+| "test [thing]" / "write tests for" / "red/green" / "tdd" / "first run the tests" / "e2e [flow]" | tdd |
 | End of session / "wrapping up" / "done for today" | session-end |
 
 Skills live in .claude/skills/. Read the relevant SKILL.md before executing.
@@ -98,6 +102,10 @@ pnpm build         # brand:gen + next build
 pnpm brand:extract # extract brand from Figma URL
 pnpm brand:gen     # regenerate tailwind.config + theme.css + brand.md
 pnpm db:types      # regenerate src/types/database.ts from Supabase
+pnpm test          # run unit + component tests (Vitest)
+pnpm test:watch    # run tests in watch mode
+pnpm test:e2e      # run end-to-end tests (Playwright) — first run: pnpm exec playwright install chromium
+pnpm test:all      # run all tests (Vitest + Playwright)
 pnpm setup         # first-time project setup
 ```
 
