@@ -191,6 +191,10 @@ Be explicit in the output about confidence:
 Flag low-confidence values with a comment in brand.config.ts so the
 developer knows to review them.
 
+## Add to writing skills
+
+Add brand and TOV context to the copywriting and UX writing skills. 
+
 ---
 
 ## Edge cases
