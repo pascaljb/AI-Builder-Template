@@ -32,6 +32,17 @@ export interface BrandConfig {
      * 8–16 is the sweet spot. Default: 12.
      */
     grayTintStrength?: number
+    /**
+     * Status / feedback colours — the "traffic light" set used for toasts,
+     * alerts, inline validation, and banners. Each 500 is expanded into a full
+     * 100–900 scale at build time, exactly like the brand colour.
+     * Omit to use the built-in defaults.
+     */
+    status?: {
+      positive: string  // success — greens
+      negative: string  // error / destructive — reds
+      notice: string    // warning / caution — ambers
+    }
   }
 
   typography: {
@@ -245,8 +256,13 @@ const brand: BrandConfig = {
   name: 'My Project',
 
   colors: {
-    primary: '#5B4CF5',
+    primary: '#079EDF',
     grayTintStrength: 12,
+    status: {
+      positive: '#36A342',
+      negative: '#E43C33',
+      notice: '#FB8A65',
+    },
   },
 
   typography: {

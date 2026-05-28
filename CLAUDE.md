@@ -25,8 +25,8 @@ Do not ask the user to provide them.
 
 ## Project
 
-**Name:** [PROJECT_NAME]
-**Repo:** [GITHUB_REPO_URL]
+**Name:** AI-Builder-Template
+**Repo:** https://github.com/pascaljb/AI-Builder-Template
 **Supabase project:** [SUPABASE_PROJECT_URL]
 
 ---
@@ -66,6 +66,7 @@ Do not ask the user to provide them.
 - No set() in components — use named slice actions
 - No hardcoded colours, spacing, or radius values — use Tailwind brand tokens
 - No Tailwind gray-*, neutral-*, slate-* — use the tinted gray-* scale
+- Use Phosphor Icons (@phosphor-icons/react) for all icons unless the user specifies otherwise
 - No default exports except Next.js pages and layouts
 - No file over 200 lines — split it
 - All async functions have explicit return types
