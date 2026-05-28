@@ -19,7 +19,7 @@ An opinionated Next.js + Supabase + Claude Code starter for shipping AI-built ap
 
 ```bash
 # Use the GitHub "Use this template" button, or:
-gh repo create my-app --template pascaljb/vibe-template
+gh repo create my-app --template pascaljb/AI-Builder-Template
 cd my-app
 
 pnpm setup        # walks through project name + Supabase + Figma

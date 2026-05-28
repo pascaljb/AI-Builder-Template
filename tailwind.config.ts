@@ -77,19 +77,16 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter","sans-serif"],
-        
-        mono: ["JetBrains Mono","monospace"],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-        '5xl': ['3rem', { lineHeight: '1.1' }]
+        'heading1': ['22px', { lineHeight: '30.5px', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'heading2': ['19px', { lineHeight: 'normal', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'heading3': ['17px', { lineHeight: 'normal', letterSpacing: '-0.2px', fontWeight: '700' }],
+        'body1': ['17px', { lineHeight: '24px', letterSpacing: '-0.4px', fontWeight: '400' }],
+        'body2': ['15px', { lineHeight: '21.45px', fontWeight: '400' }],
+        'body3': ['13.8px', { lineHeight: '20px', fontWeight: '400' }],
+        'caption1': ['13px', { lineHeight: '18px', fontWeight: '400' }],
+        'caption2': ['12.3px', { lineHeight: '18.45px', fontWeight: '400' }]
       },
       borderRadius: {
         DEFAULT: '8px',

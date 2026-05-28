@@ -47,10 +47,20 @@ automatically in dark mode.
 ## Typography
 
 - **Sans**: Inter, sans-serif
-
-- **Mono**: JetBrains Mono, monospace
 - **Type scale feel**: default
-- **Sizes**: `text-xs` → `text-5xl` with line-heights tuned to the *default* feel — use these utilities, never hardcoded `font-size`
+
+Named text styles — use the utility class (e.g. `text-heading1`), never a hardcoded `font-size`. Each class also sets weight, line-height, and tracking.
+
+| Style | Size | Line height | Weight | Tracking |
+|-------|------|-------------|--------|----------|
+| `text-heading1` | 22px | 30.5px | 700 | -0.2px |
+| `text-heading2` | 19px | normal | 700 | -0.2px |
+| `text-heading3` | 17px | normal | 700 | -0.2px |
+| `text-body1` | 17px | 24px | 400 | -0.4px |
+| `text-body2` | 15px | 21.45px | 400 | 0 |
+| `text-body3` | 13.8px | 20px | 400 | 0 |
+| `text-caption1` | 13px | 18px | 400 | 0 |
+| `text-caption2` | 12.3px | 18.45px | 400 | 0 |
 
 ## Spatial system
 
@@ -91,5 +101,5 @@ When generating components:
 4. Shadows: use `shadow` utility (maps to soft shadow style)
 5. Gray tones use the tinted `gray-*` scale — never use Tailwind's default neutral grays
 6. For toasts, alerts, and validation use the status aliases (`--color-success`, `--color-danger`, `--color-warning`, `--color-info`) or the `positive-*` / `negative-*` / `notice-*` scales — never raw red/green/amber hex
-7. Type sizes use the `text-*` utilities — never hardcoded `font-size`
+7. Type uses the named styles — `text-heading1`/`-heading2`/`-heading3`, `text-body1`/`-body2`/`-body3`, `text-caption1`/`-caption2` — never hardcoded `font-size`
 8. Use Phosphor Icons (`@phosphor-icons/react`) for all icons unless the user specifies otherwise

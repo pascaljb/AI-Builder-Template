@@ -51,25 +51,28 @@ const SPACING_SCALE: Record<string, number> = {
   spacious:    1.25,
 }
 
-// ─── Type scale ───────────────────────────────────────────────────────────────
-// Each entry: [name, fontSize, lineHeight]. Tuned per typography.scale feel.
+// ─── Type styles ──────────────────────────────────────────────────────────────
+// Named text styles come straight from brand.config.ts (typography.textStyles),
+// extracted from the design's type system. Each emits a Tailwind font-size
+// utility, e.g. `heading1` → `text-heading1`.
 
-const TYPE_SCALE: Record<'tight' | 'default' | 'loose', Array<[string, string, string]>> = {
-  tight: [
-    ['xs', '0.75rem', '1rem'],   ['sm', '0.8125rem', '1.125rem'], ['base', '0.875rem', '1.375rem'],
-    ['lg', '1rem', '1.5rem'],    ['xl', '1.125rem', '1.625rem'],  ['2xl', '1.375rem', '1.75rem'],
-    ['3xl', '1.75rem', '2rem'],  ['4xl', '2.25rem', '2.5rem'],    ['5xl', '2.75rem', '1.1'],
-  ],
-  default: [
-    ['xs', '0.75rem', '1rem'],     ['sm', '0.875rem', '1.25rem'],  ['base', '1rem', '1.5rem'],
-    ['lg', '1.125rem', '1.75rem'], ['xl', '1.25rem', '1.75rem'],   ['2xl', '1.5rem', '2rem'],
-    ['3xl', '1.875rem', '2.25rem'],['4xl', '2.25rem', '2.5rem'],   ['5xl', '3rem', '1.1'],
-  ],
-  loose: [
-    ['xs', '0.8125rem', '1.25rem'],['sm', '0.9375rem', '1.5rem'],  ['base', '1.0625rem', '1.75rem'],
-    ['lg', '1.25rem', '1.875rem'], ['xl', '1.5rem', '2rem'],       ['2xl', '1.875rem', '2.375rem'],
-    ['3xl', '2.375rem', '2.75rem'],['4xl', '3rem', '3.25rem'],     ['5xl', '3.75rem', '1.05'],
-  ],
+type TextStyle = {
+  size: string
+  lineHeight: string
+  weight?: number
+  letterSpacing?: string
+}
+
+function textStyleEntries(): string {
+  const styles = (brand.typography.textStyles ?? {}) as Record<string, TextStyle>
+  return Object.entries(styles)
+    .map(([name, s]) => {
+      const opts = [`lineHeight: '${s.lineHeight}'`]
+      if (s.letterSpacing) opts.push(`letterSpacing: '${s.letterSpacing}'`)
+      if (s.weight) opts.push(`fontWeight: '${s.weight}'`)
+      return `        '${name}': ['${s.size}', { ${opts.join(', ')} }]`
+    })
+    .join(',\n')
 }
 
 // ─── Motion tokens ───────────────────────────────────────────────────────────
@@ -131,9 +134,7 @@ function genTailwind() {
       .map(([k, v]) => `        '${k}': '${v}'`)
       .join(',\n')
 
-  const fontSizeEntries = TYPE_SCALE[brand.typography.scale]
-    .map(([name, size, lh]) => `        '${name}': ['${size}', { lineHeight: '${lh}' }]`)
-    .join(',\n')
+  const fontSizeEntries = textStyleEntries()
 
   const content = `import type { Config } from 'tailwindcss'
 
@@ -165,9 +166,11 @@ ${colorEntries('notice', notice)}
         },
       },
       fontFamily: {
-        sans: ${JSON.stringify(brand.typography.sans)},
-        ${brand.typography.serif ? `serif: ${JSON.stringify(brand.typography.serif)},` : ''}
-        ${brand.typography.mono ? `mono: ${JSON.stringify(brand.typography.mono)},` : ''}
+${[
+  `        sans: ${JSON.stringify(brand.typography.sans)},`,
+  brand.typography.serif ? `        serif: ${JSON.stringify(brand.typography.serif)},` : null,
+  brand.typography.mono ? `        mono: ${JSON.stringify(brand.typography.mono)},` : null,
+].filter(Boolean).join('\n')}
       },
       fontSize: {
 ${fontSizeEntries}
@@ -428,11 +431,16 @@ automatically in dark mode.
 
 ## Typography
 
-- **Sans**: ${brand.typography.sans.join(', ')}
-${brand.typography.serif ? `- **Serif** (editorial): ${brand.typography.serif.join(', ')}` : ''}
-${brand.typography.mono ? `- **Mono**: ${brand.typography.mono.join(', ')}` : ''}
+- **Sans**: ${brand.typography.sans.join(', ')}${brand.typography.serif ? `\n- **Serif** (editorial): ${brand.typography.serif.join(', ')}` : ''}${brand.typography.mono ? `\n- **Mono**: ${brand.typography.mono.join(', ')}` : ''}
 - **Type scale feel**: ${brand.typography.scale}
-- **Sizes**: \`text-xs\` → \`text-5xl\` with line-heights tuned to the *${brand.typography.scale}* feel — use these utilities, never hardcoded \`font-size\`
+
+Named text styles — use the utility class (e.g. \`text-heading1\`), never a hardcoded \`font-size\`. Each class also sets weight, line-height, and tracking.
+
+| Style | Size | Line height | Weight | Tracking |
+|-------|------|-------------|--------|----------|
+${Object.entries((brand.typography.textStyles ?? {}) as Record<string, { size: string; lineHeight: string; weight?: number; letterSpacing?: string }>)
+  .map(([name, s]) => `| \`text-${name}\` | ${s.size} | ${s.lineHeight} | ${s.weight ?? 400} | ${s.letterSpacing ?? '0'} |`)
+  .join('\n')}
 
 ## Spatial system
 
@@ -473,7 +481,7 @@ When generating components:
 4. Shadows: use \`shadow\` utility (maps to ${brand.shadow} shadow style)
 5. Gray tones use the tinted \`gray-*\` scale — never use Tailwind's default neutral grays
 6. For toasts, alerts, and validation use the status aliases (\`--color-success\`, \`--color-danger\`, \`--color-warning\`, \`--color-info\`) or the \`positive-*\` / \`negative-*\` / \`notice-*\` scales — never raw red/green/amber hex
-7. Type sizes use the \`text-*\` utilities — never hardcoded \`font-size\`
+7. Type uses the named styles — \`text-heading1\`/\`-heading2\`/\`-heading3\`, \`text-body1\`/\`-body2\`/\`-body3\`, \`text-caption1\`/\`-caption2\` — never hardcoded \`font-size\`
 8. Use Phosphor Icons (\`@phosphor-icons/react\`) for all icons unless the user specifies otherwise
 `
   write('.claude/context/brand.md', content)

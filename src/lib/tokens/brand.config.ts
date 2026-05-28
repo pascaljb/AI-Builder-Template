@@ -58,6 +58,17 @@ export interface BrandConfig {
      * 'loose'  — larger sizes, more leading (editorial / marketing)
      */
     scale: 'tight' | 'default' | 'loose'
+    /**
+     * Named text styles, typically extracted from the design's type system.
+     * Each becomes a Tailwind font-size utility — e.g. `heading1` → `text-heading1`
+     * — bundling size, line-height, weight, and letter-spacing in one class.
+     */
+    textStyles?: Record<string, {
+      size: string            // e.g. '22px'
+      lineHeight: string      // e.g. '30.5px' or 'normal'
+      weight?: number         // e.g. 700
+      letterSpacing?: string  // e.g. '-0.4px'
+    }>
   }
 
   /**
@@ -267,8 +278,18 @@ const brand: BrandConfig = {
 
   typography: {
     sans: ['Inter', 'sans-serif'],
-    mono: ['JetBrains Mono', 'monospace'],
     scale: 'default',
+    // Extracted from TDS Design Tokens (Figma) — all Inter.
+    textStyles: {
+      heading1: { size: '22px',   lineHeight: '30.5px',  weight: 700, letterSpacing: '-0.2px' },
+      heading2: { size: '19px',   lineHeight: 'normal',  weight: 700, letterSpacing: '-0.2px' },
+      heading3: { size: '17px',   lineHeight: 'normal',  weight: 700, letterSpacing: '-0.2px' },
+      body1:    { size: '17px',   lineHeight: '24px',    weight: 400, letterSpacing: '-0.4px' },
+      body2:    { size: '15px',   lineHeight: '21.45px', weight: 400 },
+      body3:    { size: '13.8px', lineHeight: '20px',    weight: 400 },
+      caption1: { size: '13px',   lineHeight: '18px',    weight: 400 },
+      caption2: { size: '12.3px', lineHeight: '18.45px', weight: 400 },
+    },
   },
 
   ...inferPreset('ai-prototype', 'minimal', 'smooth'),
