@@ -8,12 +8,12 @@ An opinionated Next.js + Supabase + Claude Code starter for shipping AI-built ap
 
 - **Next.js 14 App Router** with TypeScript in strict mode
 - **Supabase** wired up end to end — auth, RLS-on-by-default migrations, typed queries
-- **Tailwind + Radix UI** with a brand-token system that extracts colors and type from a Figma file
+- **Tailwind + Radix UI** with a brand-token system that extracts colors and type from a Figma file, or some basic design tokens to steer your initial vibe output away from generic output
 - **Zustand** for state, with devtools and persist baked in
 - **Vitest + React Testing Library** for unit and component tests
-- **Playwright** for E2E, with a setup that just works
+- **Playwright** for E2E tests
 - **Claude Code context system** — `CLAUDE.md`, project skills, and a session/progress log so your AI assistant always knows where you left off
-- **`pnpm setup`** — one script that asks for your project name, Supabase keys, and Figma URL, then has you ready to build
+- **`pnpm setup`** — optional one script that asks for your project name, Supabase keys, and Figma URL, then has you ready to build (you don't need Supabase setup to get going)
 
 ## Quick start
 
