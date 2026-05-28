@@ -1,4 +1,4 @@
-# vibe-template
+# AI Builder Template
 
 An opinionated Next.js + Supabase + Claude Code starter for shipping AI-built apps. Clone it, run one script, and you're away.
 
