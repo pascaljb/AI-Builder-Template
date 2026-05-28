@@ -87,7 +87,8 @@ Do not ask the user to provide them.
 | "review this" / "review the feature" / "full audit" | code-review |
 | "build [feature]" / "scaffold [feature]" | scaffold-feature |
 | "add [entity] table" / "scaffold [entity]" | scaffold-supabase |
-| "write copy for" / "improve this headline" / "critique my CTA" / "empty state copy" | copywriting |
+| "write copy for" / "improve this headline" / "critique my CTA" / "rewrite my landing page" / "hero section" | copywriting |
+| "error message" / "empty state copy" / "tooltip text" / "in-app copy" / "microcopy" / "button label" | ux-writing |
 | "test [thing]" / "write tests for" / "red/green" / "tdd" / "first run the tests" / "e2e [flow]" | tdd |
 | End of session / "wrapping up" / "done for today" | session-end |
 

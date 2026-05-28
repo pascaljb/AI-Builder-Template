@@ -1,64 +1,87 @@
-# AI-Builder-Template
+# AI Builder Template
 
-**Build a real app by describing it to your AI agent.** You direct. It writes the code.
+An opinionated Next.js + Supabase + Claude Code starter for shipping AI-built apps. Clone it, run one script, and you're away.
 
-AI agents can write code. Left alone, they write *messy* code — untested,
-inconsistent, and quick to break the moment you add the next feature. This
-template gives your agent the structure it's missing: a working foundation, and
-a set of rules it follows every time. You say what you want. It builds on solid
-ground.
+> If you're not an engineer, trying to ship AI-built apps that don't feel held together with string, this is a decent place to start.
 
-## What you get out of the box
+## What you get
 
-- **User accounts and a private database.** Supabase handles sign-in, and each
-  user only ever sees their own data. Already wired up.
-- **A design system.** Your app looks considered from the first screen. Share a
-  Figma file and your agent pulls in your exact colours and fonts — skip it and
-  a polished default is ready to go.
-- **Tests that prove it works.** Vitest and Playwright are set up so your agent
-  can check its own work, not just hope.
-- **Built-in agent skills.** The repo teaches your agent to write copy, review
-  code, and pick up where you left off (see below).
+- **Next.js 14 App Router** with TypeScript in strict mode
+- **Supabase** wired up end to end — auth, RLS-on-by-default migrations, typed queries
+- **Tailwind + Radix UI** with a brand-token system that extracts colors and type from a Figma file, or some basic design tokens to steer your initial vibe output away from generic output
+- **Zustand** for state, with devtools and persist baked in
+- **Vitest + React Testing Library** for unit and component tests
+- **Playwright** for E2E tests
+- **Claude Code context system** — `CLAUDE.md`, project skills, and a session/progress log so your AI assistant always knows where you left off
+- **`pnpm setup`** — optional one script that asks for your project name, Supabase keys, and Figma URL, then has you ready to build (you don't need Supabase setup to get going)
 
-## Start in one of two ways
-
-You'll need [Node.js](https://nodejs.org), [pnpm](https://pnpm.io), and a free
-[Supabase](https://supabase.com) account.
-
-1. **Run one command.** `pnpm setup`, then start building.
-2. **Hand it to your agent.** Open the repo in Claude Code and tell it to start
-   your project. It reads the rules and takes it from there.
-
-## The prompts that do the work
-
-You don't need technical language. These plain instructions trigger the
-built-in skills:
-
-| When | Type this | What your agent does |
-|------|-----------|----------------------|
-| Start of every session | **Load context** | Reads where you left off and picks up the thread. |
-| Building a feature | end your prompt with **red green TDD** | Writes the test first, *then* the feature — so it works, and keeps working. |
-| The wording feels off | **run copywriting skill** | Sharpens every button, message, and label. |
-| Before you call it done | **run code review** | Audits the new code and cleans it up. |
-| End of every session | **session-end** | Saves your progress so tomorrow starts where you stopped. |
-
-> Rule of thumb: **Load context** first, **session-end** last. Everything in
-> between is up to you.
-
-## Your brand, your way
-
-- **Have a Figma file?** Drop its URL into a session. Your agent extracts your
-  colours and type into the design system automatically.
-- **Don't?** The template ships with a complete default — a brand colour, tinted
-  greys, status colours for toasts and errors, and a type scale — so nothing
-  looks half-finished while you build.
-
-## Handy commands
-
-The full list lives in [`CLAUDE.md`](./CLAUDE.md). The ones you'll reach for:
+## Quick start
 
 ```bash
-pnpm setup   # first-time setup
-pnpm dev     # run your app locally
-pnpm test    # check everything still works
+# Use the GitHub "Use this template" button, or:
+gh repo create my-app --template pascaljb/vibe-template
+cd my-app
+
+pnpm setup        # walks through project name + Supabase + Figma
+pnpm dev          # start building
 ```
+
+## The stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS + Radix UI |
+| Icons | Phosphor |
+| State | Zustand (devtools + persist) |
+| Database | Supabase (RLS on by default) |
+| Auth | Supabase Auth |
+| Package manager | pnpm |
+| Unit tests | Vitest + Testing Library |
+| E2E tests | Playwright |
+| AI assistant | Claude Code |
+
+## How it works with Claude Code
+
+The `.claude/` directory is the part that took the longest to get right. It contains:
+
+- `CLAUDE.md` — auto-loads context at every session start, so Claude knows the stack, the rules, and where things go
+- `.claude/context/` — `brand.md`, `decisions.md`, `progress.md`, `session.md`. Read first thing every session
+- `.claude/skills/` — opinionated skills for scaffolding features, scaffolding Supabase tables, writing tests TDD-style, doing code reviews, writing copy, and ending sessions cleanly
+
+The result: Claude doesn't ask where things go. It already knows.
+
+## Architecture rules
+
+A few hard rules the codebase (and the AI) follows:
+
+- UI components live in `src/components/ui/` — no store access, no data fetching
+- Feature components live in `src/components/features/` — store access and lib calls, but no direct Supabase
+- All Supabase calls live in `src/lib/supabase/` — never outside
+- No `any` without a `// reason:` comment
+- No file over 200 lines
+- No hardcoded colours, spacing, or radius — Tailwind brand tokens only
+- Every data-fetching component handles loading, error, and empty states
+
+Full rules in `CLAUDE.md`.
+
+## Commands
+
+```bash
+pnpm dev           # start dev server (checks env first)
+pnpm build         # regen brand tokens + build
+pnpm test          # unit + component (Vitest)
+pnpm test:e2e      # E2E (Playwright)
+pnpm test:all      # everything
+pnpm brand:extract # extract brand tokens from a Figma URL
+pnpm db:types      # regenerate Supabase types
+```
+
+## License
+
+MIT — do whatever you want with it.
+
+---
+
+Built by [Pascal Barry](https://www.linkedin.com/in/pascal-barry-9141b3123/).

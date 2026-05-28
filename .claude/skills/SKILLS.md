@@ -56,4 +56,5 @@ Never silently fail. Always tell the user what's missing and how to fix it.
   session-start/SKILL.md
   session-end/SKILL.md
   tdd/SKILL.md
+  ux-writing/SKILL.md
 ```
