@@ -2,7 +2,7 @@
 
 An opinionated Next.js + Supabase + Claude Code starter for shipping AI-built apps. Clone it, run one script, and you're away.
 
-> If you're trying to ship AI-built apps that don't feel held together with string, this is a decent place to start.
+> If you're not an engineer, trying to ship AI-built apps that don't feel held together with string, this is a decent place to start.
 
 ## What you get
 
